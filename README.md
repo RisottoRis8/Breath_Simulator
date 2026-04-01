@@ -1,6 +1,26 @@
 # Biomed_projects
 Progetti Ing Biomed
 
+
+
+*
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+*
+
+
 Settimana 1
 Pseudocodice/diagramma logico
 Schematica di collegamento
