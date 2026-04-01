@@ -3,22 +3,7 @@ Progetti Ing Biomed
 
 
 
-*
-|
-|
-|
-|
-|
-|
-|
-|
-|
-|
-|
-|
-|
-|
-*
+
 
 
 Settimana 1
