@@ -1,0 +1,12 @@
+(kicad_sch
+	(version 20250114)
+	(generator "eeschema")
+	(generator_version "9.0")
+	(uuid "16cfe31b-2a00-452c-ab50-f926eb622f0a")
+	(paper "A4")
+	(title_block
+		(title "CONNECTORS")
+		(rev "0")
+	)
+	(lib_symbols)
+)
