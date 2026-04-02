@@ -1,0 +1,22 @@
+!SESSION 2026-04-03 00:26:29.868 -----------------------------------------------
+eclipse.buildId=Version 1.19.0
+java.version=21.0.3
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=it_IT
+Framework arguments:  -keyring /Users/cristianpetramale/.eclipse_keyring
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -keyring /Users/cristianpetramale/.eclipse_keyring
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2026-04-03 00:27:14.001
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2026-04-03 00:27:14.002
+!MESSAGE Log4j2 initialized with config file /Users/cristianpetramale/Biomed_projects/STMWorkSpace/.metadata/.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 4 4 2026-04-03 00:27:19.170
+!MESSAGE ProjectImporter: mdfind -name lsregister didn't returned anything
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2026-04-03 00:27:20.231
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY org.eclipse.cdt.core 1 0 2026-04-03 00:54:03.251
+!MESSAGE Indexed 'Firmware_Viola' (21 sources, 81 headers) in 4.63 sec: 4,941 declarations; 22,401 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.0073%)

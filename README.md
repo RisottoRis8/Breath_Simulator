@@ -1,6 +1,7 @@
-# Biomed_projects
+# Gruppo Viola, ETBL
+---
 
-Progetti Ing Biomed
+Simulatore di Polmone basato su siringa
 
 ---
 
