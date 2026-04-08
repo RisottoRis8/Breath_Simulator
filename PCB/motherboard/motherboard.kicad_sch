@@ -52,7 +52,7 @@
 		)
 	)
 	(sheet
-		(at 85.09 49.53)
+		(at 83.82 49.53)
 		(size 40.64 35.56)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -68,7 +68,7 @@
 		)
 		(uuid "b59700c8-9bbd-4529-b1d6-2c78749592cd")
 		(property "Sheetname" "power"
-			(at 85.09 48.8184 0)
+			(at 83.82 48.8184 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -77,12 +77,22 @@
 			)
 		)
 		(property "Sheetfile" "power.kicad_sch"
-			(at 85.09 85.6746 0)
+			(at 83.82 85.6746 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left top)
+			)
+		)
+		(pin "IMON" input
+			(at 124.46 78.74 0)
+			(uuid "a3f34d9f-2aa6-4820-bd32-0f3edeecda29")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
 			)
 		)
 		(instances
