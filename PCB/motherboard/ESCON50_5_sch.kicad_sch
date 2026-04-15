@@ -2236,7 +2236,7 @@
 		)
 		(uuid "53ac5543-e829-45b6-9cba-e98cef54f2b1")
 	)
-	(hierarchical_label "A_OUT_1"
+	(hierarchical_label "A_OUT_2"
 		(shape input)
 		(at 116.84 90.17 0)
 		(effects
