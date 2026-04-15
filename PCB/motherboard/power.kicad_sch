@@ -2227,10 +2227,9 @@
 	)
 	(text "BUCK 24V TO 5V"
 		(exclude_from_sim no)
-		(at 53.34 109.728 0)
+		(at 37.338 108.966 0)
 		(effects
 			(font
-				(face "Arkhip")
 				(size 2.54 2.54)
 				(bold yes)
 			)
@@ -2242,7 +2241,6 @@
 		(at 200.406 107.95 0)
 		(effects
 			(font
-				(face "Arkhip")
 				(size 2.54 2.54)
 				(bold yes)
 			)
@@ -2251,11 +2249,12 @@
 	)
 	(text "EFUSE\n"
 		(exclude_from_sim no)
-		(at 53.34 14.478 0)
+		(at 53.34 15.24 0)
 		(effects
 			(font
-				(face "Arkhip")
 				(size 2.54 2.54)
+				(thickness 0.508)
+				(bold yes)
 			)
 		)
 		(uuid "d6b45242-a8f1-4801-a765-995633ab1136")
@@ -3739,7 +3738,7 @@
 		(uuid "feaafd03-447d-47b8-b512-5e494f4e9d4b")
 	)
 	(hierarchical_label "IMON"
-		(shape input)
+		(shape output)
 		(at 101.6 60.96 180)
 		(effects
 			(font
@@ -3750,7 +3749,7 @@
 		(uuid "377d2ec2-7afa-403b-85c3-db7e6f10a159")
 	)
 	(hierarchical_label "PG_EFUSE"
-		(shape input)
+		(shape output)
 		(at 199.39 73.66 0)
 		(effects
 			(font

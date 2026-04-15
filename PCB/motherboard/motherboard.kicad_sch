@@ -45,11 +45,13 @@
 			(color 245 255 30 1.0000)
 		)
 		(uuid "5d51b145-29ae-4d3e-aa8d-a7173e82f23a")
-		(property "Sheetname" "ESCON 50_5+Protection"
-			(at 27.94 112.3184 0)
+		(property "Sheetname" "ESCON 50_5+PROTECTION"
+			(at 27.94 111.6834 0)
 			(effects
 				(font
-					(size 1.27 1.27)
+					(size 2.54 2.54)
+					(thickness 0.508)
+					(bold yes)
 				)
 				(justify left bottom)
 			)
@@ -87,11 +89,13 @@
 			(color 39 240 255 1.0000)
 		)
 		(uuid "85256a3a-9f5b-49e7-815e-3032a2c93bab")
-		(property "Sheetname" "connectors"
-			(at 227.33 46.2784 0)
+		(property "Sheetname" "CONNECTORS"
+			(at 227.33 45.6434 0)
 			(effects
 				(font
-					(size 1.27 1.27)
+					(size 2.54 2.54)
+					(thickness 0.508)
+					(bold yes)
 				)
 				(justify left bottom)
 			)
@@ -114,7 +118,7 @@
 		)
 	)
 	(sheet
-		(at 117.475 52.705)
+		(at 120.015 48.895)
 		(size 50.8 76.835)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -130,16 +134,18 @@
 		)
 		(uuid "afcae6fb-073d-4fbd-be5c-db715a0799b2")
 		(property "Sheetname" "MCU+EEPROM"
-			(at 117.475 51.9934 0)
+			(at 120.015 47.5484 0)
 			(effects
 				(font
-					(size 1.27 1.27)
+					(size 2.54 2.54)
+					(thickness 0.508)
+					(bold yes)
 				)
 				(justify left bottom)
 			)
 		)
 		(property "Sheetfile" "mcu_eeprom.kicad_sch"
-			(at 117.475 130.1246 0)
+			(at 120.015 126.3146 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -171,11 +177,13 @@
 			(color 255 171 19 1.0000)
 		)
 		(uuid "b59700c8-9bbd-4529-b1d6-2c78749592cd")
-		(property "Sheetname" "power"
-			(at 29.845 30.4034 0)
+		(property "Sheetname" "POWER"
+			(at 29.845 29.7684 0)
 			(effects
 				(font
-					(size 1.27 1.27)
+					(size 2.54 2.54)
+					(thickness 0.508)
+					(bold yes)
 				)
 				(justify left bottom)
 			)
@@ -189,7 +197,7 @@
 				(justify left top)
 			)
 		)
-		(pin "IMON" input
+		(pin "IMON" output
 			(at 64.135 45.085 0)
 			(uuid "a3f34d9f-2aa6-4820-bd32-0f3edeecda29")
 			(effects
@@ -199,7 +207,7 @@
 				(justify right)
 			)
 		)
-		(pin "PG_EFUSE" input
+		(pin "PG_EFUSE" output
 			(at 64.135 38.735 0)
 			(uuid "c079b5ca-cb1b-4731-9360-a8933bce9c42")
 			(effects
