@@ -75,6 +75,8 @@ void Error_Handler(void);
 #define HC_05_RX_GPIO_Port GPIOA
 #define ENC_Z_Pin GPIO_PIN_12
 #define ENC_Z_GPIO_Port GPIOA
+#define LED_GREEN_Pin GPIO_PIN_5
+#define LED_GREEN_GPIO_Port GPIOA
 #define SPI_SCK_Pin GPIO_PIN_3
 #define SPI_SCK_GPIO_Port GPIOB
 #define SPI_MISO_Pin GPIO_PIN_4

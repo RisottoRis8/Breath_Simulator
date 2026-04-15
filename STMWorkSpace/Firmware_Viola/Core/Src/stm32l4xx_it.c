@@ -22,6 +22,7 @@
 #include "stm32l4xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include <string.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -197,6 +198,106 @@ void SysTick_Handler(void)
 /* For the available peripheral interrupt handler names,                      */
 /* please refer to the startup file (startup_stm32l4xx.s).                    */
 /******************************************************************************/
+
+/**
+  * @brief This function handles TIM2 global interrupt for encoder clockwise detection.
+  */
+void TIM2_IRQHandler(void)
+{
+  /* USER CODE BEGIN TIM2_IRQn 0 */
+  
+  extern int32_t encoder_last_count;
+  extern TIM_HandleTypeDef htim2;
+  
+  if (__HAL_TIM_GET_FLAG(&htim2, TIM_FLAG_UPDATE) != RESET)
+  {
+    if (__HAL_TIM_GET_IT_SOURCE(&htim2, TIM_IT_UPDATE) != RESET)
+    {
+      __HAL_TIM_CLEAR_IT(&htim2, TIM_IT_UPDATE);
+      
+      /* Get current encoder count */
+      int32_t current_count = (int32_t)TIM2->CNT;
+      
+      /* Detect clockwise rotation (counter increases) */
+      if (current_count > encoder_last_count)
+      {
+        /* Turn on LED (active high on Nucleo) */
+        HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, GPIO_PIN_SET);
+      }
+      /* Detect counter-clockwise rotation (counter decreases) */
+      else if (current_count < encoder_last_count)
+      {
+        /* Turn off LED */
+        HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, GPIO_PIN_RESET);
+      }
+      
+      encoder_last_count = current_count;
+    }
+  }
+  
+  /* USER CODE END TIM2_IRQn 0 */
+  HAL_TIM_IRQHandler(&htim2);
+  /* USER CODE BEGIN TIM2_IRQn 1 */
+  
+  /* USER CODE END TIM2_IRQn 1 */
+}
+
+/**
+  * @brief This function handles USART1 global interrupt for HC05 PING/PONG communication.
+  */
+void USART1_IRQHandler(void)
+{
+  /* USER CODE BEGIN USART1_IRQn 0 */
+  
+  extern UART_HandleTypeDef huart1;
+  extern uint8_t hc05_rx_buffer[];
+  extern uint8_t hc05_rx_index;
+  extern uint8_t hc05_rx_char;
+  
+  #define HC05_BUFFER_SIZE 32
+  
+  if (__HAL_UART_GET_FLAG(&huart1, UART_FLAG_RXNE) != RESET)
+  {
+    /* Character received, check for line ending */
+    if (hc05_rx_char == '\r' || hc05_rx_char == '\n')
+    {
+      /* Null terminate the buffer */
+      if (hc05_rx_index < HC05_BUFFER_SIZE)
+      {
+        hc05_rx_buffer[hc05_rx_index] = '\0';
+      }
+      
+      /* Compare with "PING" */
+      if (strcmp((char *)hc05_rx_buffer, "PING") == 0)
+      {
+        /* Send "PONG\r\n" back */
+        uint8_t response[] = "PONG\r\n";
+        HAL_UART_Transmit(&huart1, response, sizeof(response) - 1, 100);
+      }
+      
+      /* Clear buffer for next command */
+      hc05_rx_index = 0;
+      memset(hc05_rx_buffer, 0, HC05_BUFFER_SIZE);
+    }
+    else if (hc05_rx_char != '\0')
+    {
+      /* Add character to buffer if space available */
+      if (hc05_rx_index < HC05_BUFFER_SIZE - 1)
+      {
+        hc05_rx_buffer[hc05_rx_index++] = hc05_rx_char;
+      }
+    }
+    
+    /* Re-enable receive interrupt for next character */
+    HAL_UART_Receive_IT(&huart1, &hc05_rx_char, 1);
+  }
+  
+  /* USER CODE END USART1_IRQn 0 */
+  HAL_UART_IRQHandler(&huart1);
+  /* USER CODE BEGIN USART1_IRQn 1 */
+  
+  /* USER CODE END USART1_IRQn 1 */
+}
 
 /* USER CODE BEGIN 1 */
 

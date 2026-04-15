@@ -1,0 +1,17 @@
+16:35:27 **** Incremental Build of configuration Debug for project EX1 ****
+make -j11 all 
+arm-none-eabi-gcc -o "EX1.elf" @"objects.list"   -mcpu=cortex-m4 -T"/Users/cristianpetramale/Biomed_projects/STMWorkSpace/EX1/STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="EX1.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+/Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.macos64_1.0.0.202411102158/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld: ./USB_DEVICE/App/usb_device.o: in function `MX_USB_DEVICE_Init':
+/Users/cristianpetramale/Biomed_projects/STMWorkSpace/EX1/Debug/../USB_DEVICE/App/usb_device.c:74:(.text.MX_USB_DEVICE_Init+0x14): undefined reference to `Error_Handler'
+/Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.macos64_1.0.0.202411102158/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld: /Users/cristianpetramale/Biomed_projects/STMWorkSpace/EX1/Debug/../USB_DEVICE/App/usb_device.c:78:(.text.MX_USB_DEVICE_Init+0x26): undefined reference to `Error_Handler'
+/Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.macos64_1.0.0.202411102158/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld: /Users/cristianpetramale/Biomed_projects/STMWorkSpace/EX1/Debug/../USB_DEVICE/App/usb_device.c:82:(.text.MX_USB_DEVICE_Init+0x38): undefined reference to `Error_Handler'
+/Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.macos64_1.0.0.202411102158/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld: /Users/cristianpetramale/Biomed_projects/STMWorkSpace/EX1/Debug/../USB_DEVICE/App/usb_device.c:86:(.text.MX_USB_DEVICE_Init+0x48): undefined reference to `Error_Handler'
+/Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.macos64_1.0.0.202411102158/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld: ./USB_DEVICE/Target/usbd_conf.o: in function `HAL_PCD_MspInit':
+/Users/cristianpetramale/Biomed_projects/STMWorkSpace/EX1/Debug/../USB_DEVICE/Target/usbd_conf.c:84:(.text.HAL_PCD_MspInit+0x3a): undefined reference to `Error_Handler'
+/Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.macos64_1.0.0.202411102158/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld: ./USB_DEVICE/Target/usbd_conf.o:/Users/cristianpetramale/Biomed_projects/STMWorkSpace/EX1/Debug/../USB_DEVICE/Target/usbd_conf.c:191: more undefined references to `Error_Handler' follow
+collect2: error: ld returned 1 exit status
+make: *** [makefile:68: EX1.elf] Error 1
+"make -j11 all" terminated with exit code 2. Build might be incomplete.
+
+16:35:27 Build Failed. 7 errors, 0 warnings. (took 276ms)
+
