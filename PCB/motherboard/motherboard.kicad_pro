@@ -625,6 +625,10 @@
     [
       "5d51b145-29ae-4d3e-aa8d-a7173e82f23a",
       "ESCON 50_5+Protection"
+    ],
+    [
+      "afcae6fb-073d-4fbd-be5c-db715a0799b2",
+      "MCU+EEPROM"
     ]
   ],
   "text_variables": {}
