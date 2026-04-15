@@ -1,0 +1,101 @@
+
+
+
+var stato;
+
+
+
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
+    //COMANDATA DALL'HC05 
+
+    //CAMBIO STATO TRAMITE PARSER
+
+    //GESTISCE STOP 
+
+	HAL_UART_Receive_IT(&huart2, buffer, 17);
+}
+
+void init_comunicazioni()
+//baud rate , byte da prendere
+
+void init_interrupt()
+
+void calibra() //USANDO MICROSWITCH E ENCODER, CALCOLIAMO LA POSIZIONE DELLO STANTUFFO IN FUNZIONE DEI TICK DELL'ENCODER
+
+void set_velocity_pid() //IMPLEMENTARE PID
+
+
+
+
+void main(){
+
+    int posizione; //TICK, calcoliamo la posizione come percentuale di corsa
+
+
+
+    //INIT
+
+    init_comunicazioni();
+    init_interrupt();
+
+    calibra();
+
+    while true(){
+        //FSM       
+        //DEBUG, HOMING, FLUSSO_COSTANTE, SINUSOIDE, FLUSSO_CUSTOM, ERRORE, READY 
+
+
+
+        switch (stato){ //OGNUNO DI QUESTI STATI RICEVERA' COMANDI UNA VOLTA DENTRO.
+                        //ALL'ENTRATA DI OGNI STATO il uC INVIA AL PC LO STATO ATTUALE IN MODO CHE SI POSSA CAMBIARE LA GUI
+                        //OGNI STATO ARMA UART CON I PARAMETRI CORRETTI
+                        //OGNI STATO ARMA INTERRUPT CORRETTI CON TIMING CORRETTI
+
+            case DEBUG:
+
+
+            case HOMING: 
+            //RICEVE DATO POSIZIONE
+            //SPOSTIAMO LO STANTUFFO ALLA POSIZIONE CORRETTA.
+            //NON E' NECESSARIA L'AZIONE DEI SENSORI, SE NON QUELLO DI POSIZIONE
+
+            case FLUSSO_COSTANTE:
+            //ARMARE TIMERS PER RETROAZIONE
+            //RICEVE DATO VELOCITA' DI FLUSSO 
+            //USA FUNZIONE set_velocity_pid()
+            //GESTIRE PURE ERRORI
+            //RICEVE DATI DI VELOCITA E AMPIEZZA
+
+            case SINUSOIDE:
+            //ARMARE TIMERS PER RETROAZIONE 
+            //SIMILE A FLUSSO COSTANTE, BISOGNA USARE set_velocity_pid CON FUNZIONE SIN 
+            //RICEVE DATI DI AMPIEZZA E FREQUENZA
+            
+            case FLUSSO_CUSTOM:
+            //ARMARE TIMERS PER RETROAZIONE 
+            //RICEVE VARI DATI DA PC IN TEMPO REALE (?)
+            //USA LA FUNZIONE set_velocity_pid() PER OGNI DATO RICEVUTO IN TEMPO REALE
+            //BISOGNA FARE ATTENZIONE PER LA POSIZIONE DI INIZIO CORSA E FINE CORSA --CHIEDERE!
+
+            //I FLUSSI POSSONO SUPERARE I 2.4LITRI ALTRIMENTI INVERSIONE!!!
+            //METTERE LIMITE DI FLUSSO
+
+            case ERRORE:
+            //FERMARE TUTTO, RIPORTARE ERRORE ED ASPETTARE AZIONE DEL PC
+
+            case READY:
+            //ASPETTA LO STATO DA SETTARE.
+            //NON FA QUASI NIENTE
+
+
+
+        }
+
+
+
+
+
+
+    }
+
+}

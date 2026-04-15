@@ -1,0 +1,10 @@
+17:35:06 **** Incremental Build of configuration Debug for project SerialComm ****
+make -j11 all 
+arm-none-eabi-size  SerialComm.elf 
+   text	   data	    bss	    dec	    hex	filename
+  34056	    468	   2044	  36568	   8ed8	SerialComm.elf
+Finished building: default.size.stdout
+ 
+
+17:35:06 Build Finished. 0 errors, 0 warnings. (took 157ms)
+
