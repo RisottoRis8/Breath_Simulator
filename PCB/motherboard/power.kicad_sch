@@ -7009,7 +7009,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "inductors:IND-SMD_L7.3-W6.8"
 			(at 142.24 147.32 0)
 			(hide yes)
 			(show_name no)
@@ -7440,7 +7440,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SMA"
+		(property "Footprint" "diodes:SMA_L4.4-W2.8-LS5.4-RD"
 			(at 132.715 151.13 0)
 			(hide yes)
 			(show_name no)
@@ -8281,7 +8281,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "diodes:SMB_L4.3-W3.6-LS5.4-BI"
 			(at 30.48 48.26 0)
 			(hide yes)
 			(show_name no)

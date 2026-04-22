@@ -5035,7 +5035,7 @@
 				)
 			)
 		)
-		(property "Footprint" "induttorejlpcb_escon:Senza-titolo"
+		(property "Footprint" "inductors:IND-SMD_L17.0-W17.0_YSPIA1770-100M"
 			(at 59.69 206.68 0)
 			(hide yes)
 			(show_name no)
@@ -6501,7 +6501,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "transistors:PG-TDSON-8_L5.0-W6.0-P1.27-BL-EP"
 			(at 172.72 54.61 0)
 			(hide yes)
 			(show_name no)
@@ -6712,7 +6712,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "resistors:TO-220-2_L10.1-W4.5-P5.08-L"
 			(at 266.192 101.6 90)
 			(hide yes)
 			(show_name no)
@@ -6872,7 +6872,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm"
+		(property "Footprint" "diodes:SOT-23-3_L2.9-W1.5-P1.90-LS2.6-BR"
 			(at 257.81 104.14 0)
 			(hide yes)
 			(show_name no)
@@ -7321,7 +7321,7 @@
 				)
 			)
 		)
-		(property "Footprint" "induttorejlpcb_escon:Senza-titolo"
+		(property "Footprint" "inductors:IND-SMD_L17.0-W17.0_YSPIA1770-100M"
 			(at 57.15 234.62 0)
 			(hide yes)
 			(show_name no)
@@ -7817,7 +7817,7 @@
 				)
 			)
 		)
-		(property "Footprint" "induttorejlpcb_escon:Senza-titolo"
+		(property "Footprint" "inductors:IND-SMD_L17.0-W17.0_YSPIA1770-100M"
 			(at 57.15 263.83 0)
 			(hide yes)
 			(show_name no)
@@ -8557,7 +8557,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "transistors:DFN-8_L5.7-W4.9-P1.27-LS6.1-BL"
 			(at 270.51 92.71 0)
 			(hide yes)
 			(show_name no)
