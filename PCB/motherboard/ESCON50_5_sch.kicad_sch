@@ -5431,7 +5431,7 @@
 			)
 		)
 		(property "Value" "390"
-			(at 79.248 181.61 90)
+			(at 83.82 180.848 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -6957,7 +6957,7 @@
 			)
 		)
 		(property "Value" "390"
-			(at 79.248 152.4 90)
+			(at 83.566 151.384 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7142,7 +7142,7 @@
 			)
 		)
 		(property "Value" "390"
-			(at 79.248 124.46 90)
+			(at 83.82 123.698 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7483,7 +7483,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "96k"
+		(property "Value" "95k3"
 			(at 242.57 97.7899 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7726,7 +7726,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "4.7k"
+		(property "Value" "4k75"
 			(at 226.06 87.6299 0)
 			(show_name no)
 			(do_not_autoplace no)
