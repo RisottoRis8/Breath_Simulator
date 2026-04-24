@@ -6,7 +6,7 @@
 	(property "Reference" "U?"
 		(at 0 -9.5005 0)
 		(layer "F.SilkS")
-		(uuid "075201ce-ea01-4962-9474-be75b9d99b7e")
+		(uuid "8511b993-d6e8-49ed-aab1-101f9a1a0713")
 		(effects
 			(font
 				(size 1 1)
@@ -17,7 +17,7 @@
 	(property "Value" "IND-SMD_L17.0-W17.0_YSPIA1770-100M"
 		(at 0 9.530433 0)
 		(layer "F.Fab")
-		(uuid "e9d6beee-c38d-42ea-876c-d1d0322ead61")
+		(uuid "a6f82c1b-19ac-46a2-98b4-b070378bdfa8")
 		(effects
 			(font
 				(size 1 1)
@@ -29,7 +29,7 @@
 		(at 0 0 0)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "97d6fc20-ae5e-405e-8937-db3d5a3a3269")
+		(uuid "fe010889-e667-4b98-9252-e3fffbbe4652")
 		(effects
 			(font
 				(size 1 1)
@@ -41,7 +41,7 @@
 		(at 0 0 0)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "21e7b44a-c43b-4bb8-a299-0c371852db3c")
+		(uuid "94853933-3145-4115-8229-66d66df5dc77")
 		(effects
 			(font
 				(size 1 1)
@@ -58,7 +58,7 @@
 			(type default)
 		)
 		(layer "F.SilkS")
-		(uuid "2990fe94-3710-40a7-9a87-26fe1032035f")
+		(uuid "ef180922-7165-48bf-a776-5569b5885bca")
 	)
 	(fp_line
 		(start -8.509 -6.631)
@@ -68,7 +68,7 @@
 			(type default)
 		)
 		(layer "F.SilkS")
-		(uuid "430375d6-05ad-44be-b725-9ab4f266256b")
+		(uuid "64c84cc9-1c87-45c6-add1-d06145cb7479")
 	)
 	(fp_line
 		(start -8.509 8.509)
@@ -78,7 +78,7 @@
 			(type default)
 		)
 		(layer "F.SilkS")
-		(uuid "d2940799-ba5f-435d-bd6e-d4df2f4862d3")
+		(uuid "619df99e-44c1-4991-bd68-3744bda8aa97")
 	)
 	(fp_line
 		(start 8.509 -8.509)
@@ -88,7 +88,7 @@
 			(type default)
 		)
 		(layer "F.SilkS")
-		(uuid "17143882-d8e5-4a6a-a564-d6b1088ca4ae")
+		(uuid "1f897c2f-cc97-491b-874c-bb0b0ad53b52")
 	)
 	(fp_line
 		(start 8.509 6.631)
@@ -98,7 +98,7 @@
 			(type default)
 		)
 		(layer "F.SilkS")
-		(uuid "54527a7d-9ab5-4be9-9555-6e562d165698")
+		(uuid "4fa55267-83af-4eca-9868-f7f5dd29ac35")
 	)
 	(fp_line
 		(start 8.509 8.509)
@@ -108,7 +108,7 @@
 			(type default)
 		)
 		(layer "F.SilkS")
-		(uuid "9441ddb7-3389-41da-8c31-fb69720d6bcb")
+		(uuid "71e67047-d881-4d69-813f-e7761bbf8bbf")
 	)
 	(fp_rect
 		(start -10.15 -8.7755)
@@ -119,7 +119,7 @@
 		)
 		(fill no)
 		(layer "F.CrtYd")
-		(uuid "905b6909-18e8-4cf6-839f-6479558f7c4b")
+		(uuid "56b4876e-c4d4-485f-a001-fa8ee0649e6b")
 	)
 	(fp_line
 		(start -8.5 -8.5)
@@ -129,7 +129,7 @@
 			(type default)
 		)
 		(layer "F.Fab")
-		(uuid "12a9d730-03f6-4ced-9802-6c1081c3db62")
+		(uuid "73f97a84-9eb1-4fa4-beca-19157b755a32")
 	)
 	(fp_line
 		(start -8.5 8.5)
@@ -139,7 +139,7 @@
 			(type default)
 		)
 		(layer "F.Fab")
-		(uuid "18782f07-db6d-4f90-bd4c-31329ebc2222")
+		(uuid "37402043-63ef-4692-adf1-53907728ff12")
 	)
 	(fp_line
 		(start 8.5 -8.5)
@@ -149,7 +149,7 @@
 			(type default)
 		)
 		(layer "F.Fab")
-		(uuid "9b3763d2-b8c0-45b2-a082-509790787aad")
+		(uuid "cc3ff23b-0431-46ed-9e37-41c24105a9d9")
 	)
 	(fp_line
 		(start 8.5 8.5)
@@ -159,7 +159,7 @@
 			(type default)
 		)
 		(layer "F.Fab")
-		(uuid "a8752418-fc04-412b-baa6-584a5b7eb8dd")
+		(uuid "6a8e5370-c81e-477d-b7a9-241f54672113")
 	)
 	(fp_poly
 		(pts
@@ -172,7 +172,7 @@
 		)
 		(fill yes)
 		(layer "F.Fab")
-		(uuid "885f2d17-d648-4a8c-a160-a47d939e39db")
+		(uuid "43fc40ab-2606-4c4a-90cf-81cb5df49ff9")
 	)
 	(fp_poly
 		(pts
@@ -184,7 +184,7 @@
 		)
 		(fill yes)
 		(layer "User.1")
-		(uuid "dc4209ea-8f2a-4b4a-8689-a42ef798806c")
+		(uuid "ae60a47a-285e-4f4b-bbe7-70895e4e57c7")
 	)
 	(fp_poly
 		(pts
@@ -196,12 +196,12 @@
 		)
 		(fill yes)
 		(layer "User.1")
-		(uuid "e5627925-0811-4f80-9366-9cda26251166")
+		(uuid "5ba10ffc-5ae2-49dc-ab14-d270af995c80")
 	)
 	(fp_text user "${REFERENCE}"
 		(at 0 0 0)
 		(layer "F.Fab")
-		(uuid "16ae75e0-9bdb-46f7-a427-4c83a3fa8711")
+		(uuid "62a63703-da0d-432b-b089-a8fb6f208313")
 		(effects
 			(font
 				(size 0.5 0.5)
@@ -213,13 +213,24 @@
 		(at -7.7 0)
 		(size 4.4 12.8)
 		(layers "F.Cu" "F.Mask" "F.Paste")
-		(uuid "2fd3c101-8941-4348-b504-fe5c5cccd986")
+		(uuid "073a64a4-1aa3-4766-9a68-44f8d0d54d8a")
 	)
 	(pad "2" smd rect
 		(at 7.7 0)
 		(size 4.4 12.8)
 		(layers "F.Cu" "F.Mask" "F.Paste")
-		(uuid "e25794f4-dde7-4ea8-a5f3-7e4411a39001")
+		(uuid "c25aadde-6dbb-44a6-88bb-fb77274270f7")
 	)
 	(embedded_fonts no)
+	(model "C:/Users/amagl/Documents/UNI/Biomed_projects/PCB/libraries/3d/inductor_ 22u.step"
+		(offset
+			(xyz -9 -8.5 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz -0 -0 -0)
+		)
+	)
 )

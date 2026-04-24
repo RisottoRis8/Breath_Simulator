@@ -891,6 +891,207 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Device:LED"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 1.016)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "D"
+				(at 0 2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "LED"
+				(at 0 -2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Light emitting diode"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Sim.Pins" "1=K 2=A"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "LED diode"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "LED* LED_SMD:* LED_THT:*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "LED_0_1"
+				(polyline
+					(pts
+						(xy -3.048 -0.762) (xy -4.572 -2.286) (xy -3.81 -2.286) (xy -4.572 -2.286) (xy -4.572 -1.524)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.778 -0.762) (xy -3.302 -2.286) (xy -2.54 -2.286) (xy -3.302 -2.286) (xy -3.302 -1.524)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.27 0) (xy 1.27 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.27 -1.27) (xy -1.27 1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 -1.27) (xy 1.27 1.27) (xy -1.27 0) (xy 1.27 -1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "LED_1_1"
+				(pin passive line
+					(at -3.81 0 0)
+					(length 2.54)
+					(name "K"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 3.81 0 180)
+					(length 2.54)
+					(name "A"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Device:R"
 			(pin_numbers
 				(hide yes)
@@ -2216,18 +2417,7 @@
 					)
 				)
 			)
-			(property "Description" ""
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "MF" "Texas Instruments"
+			(property "Description" "Four-bit bidirectional voltage-level shifter for open-drain and push-pull applications"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -2239,7 +2429,7 @@
 					(justify bottom)
 				)
 			)
-			(property "Description_1" "Four-bit bidirectional voltage-level shifter for open-drain and push-pull applications"
+			(property "MF" "Texas Instruments"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -2544,6 +2734,44 @@
 						)
 					)
 					(number "14"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+			)
+			(symbol "TXS0104EPWR_1_0"
+				(pin bidirectional line
+					(at -17.78 -12.7 0)
+					(length 5.08)
+					(name "NC"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -17.78 -15.24 0)
+					(length 5.08)
+					(name "NC"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "9"
 						(effects
 							(font
 								(size 1.016 1.016)
@@ -3095,6 +3323,12 @@
 		(uuid "0a3f62e8-94c2-4bb7-bd59-636ab25751bf")
 	)
 	(junction
+		(at 44.45 163.83)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "509d78a3-7bbc-4d94-bcca-be8fc982f00e")
+	)
+	(junction
 		(at 241.3 34.29)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3137,6 +3371,12 @@
 		(uuid "dd6ddfc3-9676-4a94-a261-8624478e9467")
 	)
 	(junction
+		(at 44.45 147.32)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "e6e143d6-1e43-44be-af5e-4e8f868d0f22")
+	)
+	(junction
 		(at 172.72 49.53)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3151,12 +3391,20 @@
 		(uuid "36493343-04ce-4622-992a-994a51704f42")
 	)
 	(no_connect
+		(at 99.06 186.69)
+		(uuid "4cbb6132-46a4-4c91-8d9e-1df117732140")
+	)
+	(no_connect
 		(at 30.48 91.44)
 		(uuid "989f8c70-b618-41e8-bf8e-0b22a3f1d008")
 	)
 	(no_connect
 		(at 33.02 38.1)
 		(uuid "99985dd4-d05c-4709-961b-9230b39004a5")
+	)
+	(no_connect
+		(at 99.06 189.23)
+		(uuid "aabcc659-5612-45bb-9576-0c16fbf7b2da")
 	)
 	(no_connect
 		(at 30.48 96.52)
@@ -3323,6 +3571,16 @@
 			(type default)
 		)
 		(uuid "11bec4e2-69d4-48e1-8940-b411854cf8fa")
+	)
+	(wire
+		(pts
+			(xy 36.83 163.83) (xy 36.83 162.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "135f53a1-c28a-43d7-a5f8-ed8bb8b0fecd")
 	)
 	(wire
 		(pts
@@ -3536,6 +3794,16 @@
 	)
 	(wire
 		(pts
+			(xy 36.83 163.83) (xy 44.45 163.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5cc4f3a1-4110-46d0-92b0-8d8bf06366f0")
+	)
+	(wire
+		(pts
 			(xy 105.41 95.25) (xy 105.41 93.98)
 		)
 		(stroke
@@ -3596,16 +3864,6 @@
 	)
 	(wire
 		(pts
-			(xy 44.45 161.29) (xy 44.45 163.83)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "75457818-3f3a-4180-8efc-95cffe77e54f")
-	)
-	(wire
-		(pts
 			(xy 67.31 118.11) (xy 67.31 114.3)
 		)
 		(stroke
@@ -3636,7 +3894,17 @@
 	)
 	(wire
 		(pts
-			(xy 44.45 153.67) (xy 44.45 157.48)
+			(xy 36.83 147.32) (xy 44.45 147.32)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7f57944b-1b66-440e-9b66-6c35b1b026d9")
+	)
+	(wire
+		(pts
+			(xy 44.45 147.32) (xy 44.45 151.13)
 		)
 		(stroke
 			(width 0)
@@ -3756,6 +4024,16 @@
 	)
 	(wire
 		(pts
+			(xy 44.45 161.29) (xy 44.45 163.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9b8d48d5-a90e-4c3e-83e2-b26e2320d441")
+	)
+	(wire
+		(pts
 			(xy 191.77 115.57) (xy 191.77 118.11)
 		)
 		(stroke
@@ -3776,7 +4054,7 @@
 	)
 	(wire
 		(pts
-			(xy 44.45 157.48) (xy 49.53 157.48)
+			(xy 44.45 151.13) (xy 49.53 151.13)
 		)
 		(stroke
 			(width 0)
@@ -4532,7 +4810,7 @@
 	)
 	(hierarchical_label "HEAT_VDD"
 		(shape input)
-		(at 49.53 157.48 0)
+		(at 49.53 151.13 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4806,6 +5084,17 @@
 				)
 			)
 		)
+		(property "VRATE" "16"
+			(at 154.94 166.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "76ba8dfb-5687-4c13-a595-a43b5ff0767b")
 		)
@@ -4875,7 +5164,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Four-bit bidirectional voltage-level shifter for open-drain and push-pull applications"
 			(at 116.84 173.99 0)
 			(hide yes)
 			(show_name no)
@@ -5017,6 +5306,12 @@
 		)
 		(pin "2"
 			(uuid "c77fc084-586d-4de5-92ae-5812d7999c60")
+		)
+		(pin "6"
+			(uuid "b6267888-0072-484a-90c1-92f7e0d512a5")
+		)
+		(pin "9"
+			(uuid "86f9367a-df0c-471a-b2cc-7990ebab042c")
 		)
 		(instances
 			(project "motherboard"
@@ -5165,6 +5460,17 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
+			(at 261.62 113.03 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "VRATE" "16"
 			(at 261.62 113.03 0)
 			(hide yes)
 			(show_name no)
@@ -5334,6 +5640,17 @@
 				)
 			)
 		)
+		(property "VRATE" "16"
+			(at 147.32 166.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "0c0773b5-ad5c-49a8-8d40-da852ff81088")
 		)
@@ -5406,6 +5723,17 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
+			(at 105.41 90.17 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "VRATE" "16"
 			(at 105.41 90.17 0)
 			(hide yes)
 			(show_name no)
@@ -5894,6 +6222,87 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 36.83 151.13 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "60870899-20e0-47bd-9e88-d9efd29d5e8f")
+		(property "Reference" "R32"
+			(at 31.75 148.59 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "1k"
+			(at 32.766 151.638 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+			(at 35.052 151.13 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 36.83 151.13 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 36.83 151.13 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "1793e70c-929d-451c-9fd9-28a3ec1c1e6f")
+		)
+		(pin "2"
+			(uuid "0b070f77-6a81-4034-af8f-196db8bdd7ad")
+		)
+		(instances
+			(project "motherboard"
+				(path "/932efb2d-d041-4add-96d0-4fa635c69d39/afcae6fb-073d-4fbd-be5c-db715a0799b2"
+					(reference "R32")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C")
 		(at 246.38 38.1 0)
 		(unit 1)
@@ -5950,6 +6359,17 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
+			(at 246.38 38.1 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "VRATE" "16"
 			(at 246.38 38.1 0)
 			(hide yes)
 			(show_name no)
@@ -6433,6 +6853,17 @@
 				)
 			)
 		)
+		(property "VRATE" "16"
+			(at 92.71 91.44 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "06bacb7f-c893-42a3-aaf0-bd456879b9ec")
 		)
@@ -6443,6 +6874,98 @@
 			(project "motherboard"
 				(path "/932efb2d-d041-4add-96d0-4fa635c69d39/afcae6fb-073d-4fbd-be5c-db715a0799b2"
 					(reference "C31")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:LED")
+		(at 36.83 158.75 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "7aa81d2f-b8f5-4d9f-9469-a9df483df044")
+		(property "Reference" "D7"
+			(at 31.242 156.972 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "LED_YELLOW"
+			(at 23.368 159.512 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "LED_SMD:LED_1206_3216Metric_Pad1.42x1.75mm_HandSolder"
+			(at 36.83 158.75 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 36.83 158.75 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Light emitting diode"
+			(at 36.83 158.75 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Sim.Pins" "1=K 2=A"
+			(at 36.83 158.75 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "e2c92875-5307-437a-a785-4b59e4495aa5")
+		)
+		(pin "2"
+			(uuid "a2c84bf3-60f6-4fa4-86e9-f1cf2e3f42ee")
+		)
+		(instances
+			(project "motherboard"
+				(path "/932efb2d-d041-4add-96d0-4fa635c69d39/afcae6fb-073d-4fbd-be5c-db715a0799b2"
+					(reference "D7")
 					(unit 1)
 				)
 			)
@@ -7853,7 +8376,7 @@
 	)
 	(symbol
 		(lib_id "power:+5V")
-		(at 44.45 153.67 0)
+		(at 44.45 147.32 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -7861,10 +8384,9 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "cd41be7f-8bd4-46d9-9b3e-67a4050785b6")
 		(property "Reference" "#PWR0100"
-			(at 44.45 157.48 0)
+			(at 44.45 151.13 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7875,7 +8397,7 @@
 			)
 		)
 		(property "Value" "+5V"
-			(at 44.45 148.59 0)
+			(at 45.72 143.764 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7885,7 +8407,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 44.45 153.67 0)
+			(at 44.45 147.32 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7896,7 +8418,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 44.45 153.67 0)
+			(at 44.45 147.32 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7907,7 +8429,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+5V\""
-			(at 44.45 153.67 0)
+			(at 44.45 147.32 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)

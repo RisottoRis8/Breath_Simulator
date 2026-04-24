@@ -4380,15 +4380,14 @@
 				)
 			)
 		)
-		(property "Value" "+24V"
-			(at 237.49 43.1799 90)
+		(property "Value" "+24V_UNPROTECTED"
+			(at 240.03 40.64 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
 		(property "Footprint" ""

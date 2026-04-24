@@ -51,7 +51,7 @@
       "conflict_shadows",
       "shapes"
     ],
-    "visible_layers": "ffffffff_ffffffff_ffffffff_ffffffff",
+    "visible_layers": "ffffffff_ffffffff_fffffff7_ffffffff",
     "zone_display_mode": 0
   },
   "git": {
@@ -75,6 +75,8 @@
       false,
       false,
       false,
+      false,
+      false,
       false
     ],
     "col_order": [
@@ -87,19 +89,23 @@
       6,
       7,
       8,
-      9
+      9,
+      10,
+      11
     ],
     "col_widths": [
-      258,
-      243,
-      174,
-      143,
-      150,
-      165,
-      150,
-      193,
-      150,
-      150
+      221,
+      208,
+      149,
+      126,
+      129,
+      141,
+      129,
+      168,
+      129,
+      129,
+      129,
+      140
     ],
     "custom_group_rules": [],
     "expanded_rows": [],
