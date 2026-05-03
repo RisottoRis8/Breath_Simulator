@@ -1,0 +1,217 @@
+/* USER CODE BEGIN Header */
+/**
+  ******************************************************************************
+  * @file           : main.c
+  * @brief          : Main program body
+  ******************************************************************************
+  */
+/* USER CODE END Header */
+/* Includes ------------------------------------------------------------------*/
+#include "main.h"
+
+/* Private includes ----------------------------------------------------------*/
+/* USER CODE BEGIN Includes */
+#include <string.h>
+#include <stdio.h> // Necessario per sprintf
+/* USER CODE END Includes */
+
+/* Private typedef -----------------------------------------------------------*/
+/* USER CODE BEGIN PTD */
+
+/* USER CODE END PTD */
+
+/* Private define ------------------------------------------------------------*/
+/* USER CODE BEGIN PD */
+
+/* USER CODE END PD */
+
+/* Private macro -------------------------------------------------------------*/
+/* USER CODE BEGIN PM */
+
+/* USER CODE END PM */
+
+/* Private variables ---------------------------------------------------------*/
+I2C_HandleTypeDef hi2c1; // Assicurati di generare l'init I2C1 da CubeMX
+UART_HandleTypeDef huart1;
+UART_HandleTypeDef huart2;
+
+/* USER CODE BEGIN PV */
+uint8_t rxData1;
+uint8_t rxData2;
+uint8_t rx_buff[32];
+int i = 0;
+volatile uint8_t cmd_received = 0; // Flag per notificare il ciclo main
+/* USER CODE END PV */
+
+/* Private function prototypes -----------------------------------------------*/
+void SystemClock_Config(void);
+static void MX_GPIO_Init(void);
+static void MX_USART2_UART_Init(void);
+static void MX_USART1_UART_Init(void);
+static void MX_I2C1_Init(void); // Aggiunto prototipo I2C
+/* USER CODE BEGIN PFP */
+
+/* USER CODE END PFP */
+
+/* Private user code ---------------------------------------------------------*/
+/* USER CODE BEGIN 0 */
+// ATTENZIONE: Per usare "%f" nello sprintf, devi abilitare il supporto float nel linker.
+// In STM32CubeIDE: Project -> Properties -> C/C++ Build -> Settings -> MCU Settings -> Spunta "Use float with printf".
+/* USER CODE END 0 */
+
+/**
+  * @brief  The application entry point.
+  * @retval int
+  */
+int main(void)
+{
+  /* USER CODE BEGIN 1 */
+
+  /* USER CODE END 1 */
+
+  /* MCU Configuration--------------------------------------------------------*/
+  HAL_Init();
+
+  /* USER CODE BEGIN Init */
+
+  /* USER CODE END Init */
+
+  /* Configure the system clock */
+  SystemClock_Config();
+
+  /* USER CODE BEGIN SysInit */
+
+  /* USER CODE END SysInit */
+
+  /* Initialize all configured peripherals */
+  MX_GPIO_Init();
+  MX_USART2_UART_Init();
+  MX_USART1_UART_Init();
+  MX_I2C1_Init(); // Inizializza I2C
+
+  /* USER CODE BEGIN 2 */
+  HAL_UART_Receive_IT(&huart1, &rxData1, 1);
+  HAL_UART_Receive_IT(&huart2, &rxData2, 1);
+  /* USER CODE END 2 */
+
+  /* Infinite loop */
+  /* USER CODE BEGIN WHILE */
+  while (1)
+  {
+      if (cmd_received) {
+          // Seleziona il comportamento in base al comando "READ"
+          if (strncmp((char*)rx_buff, "READ", 4) == 0) {
+              uint8_t cmd = 0xF1; // Comando di Trigger Measurement per SDP610
+              uint8_t data[3];
+              char out_buf[64];
+
+              // Invia comando all'indirizzo 0x40 (in HAL è shiftato a sinistra: 0x80)
+              if (HAL_I2C_Master_Transmit(&hi2c1, 0x80, &cmd, 1, 100) == HAL_OK) {
+
+                  HAL_Delay(50); // L'SDP610 richiede fino a ~45ms per effettuare la misurazione
+
+                  // Leggi 2 byte di dati + 1 byte di CRC
+                  if (HAL_I2C_Master_Receive(&hi2c1, 0x80, data, 3, 100) == HAL_OK) {
+                      int16_t ticks = (data[0] << 8) | data[1];
+                      float pressure = (float)ticks / 60.0f; // Scale factor = 60 per SDP610-500Pa
+
+                      sprintf(out_buf, "Pressione: %.2f Pa\r\n", pressure);
+                      HAL_UART_Transmit(&huart1, (uint8_t*)out_buf, strlen(out_buf), 100);
+                  } else {
+                      HAL_UART_Transmit(&huart1, (uint8_t*)"I2C Rx Error\r\n", 14, 100);
+                  }
+              } else {
+                  HAL_UART_Transmit(&huart1, (uint8_t*)"Sensore non trovato\r\n", 21, 100);
+              }
+          } else {
+              // Comportamento originale: se non è "READ", fai solo l'eco
+              HAL_UART_Transmit(&huart1, rx_buff, strlen((char*)rx_buff), 100);
+              HAL_UART_Transmit(&huart1, (uint8_t*)"\r\n", 2, 100);
+          }
+
+          // Resetta il buffer e la flag per il prossimo comando
+          memset(rx_buff, 0, 32);
+          i = 0;
+          cmd_received = 0;
+      }
+    /* USER CODE END WHILE */
+
+    /* USER CODE BEGIN 3 */
+  }
+  /* USER CODE END 3 */
+}
+
+/* ... (SystemClock_Config, MX_USART1_UART_Init, MX_USART2_UART_Init, MX_GPIO_Init omesse per brevità, lascia le tue originali) ... */
+
+/**
+  * @brief I2C1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_I2C1_Init(void)
+{
+  /* Nota: i parametri "Timing" variano in base al clock del micro.
+   * È fortemente consigliato far generare questa funzione da STM32CubeMX
+   * configurando i pin PA9 e PA10 come I2C1_SCL e I2C1_SDA. */
+  hi2c1.Instance = I2C1;
+  hi2c1.Init.Timing = 0x00000E14; // Esempio per 100kHz standard mode
+  hi2c1.Init.OwnAddress1 = 0;
+  hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
+  hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+  hi2c1.Init.OwnAddress2 = 0;
+  hi2c1.Init.OwnAddress2Masks = I2C_OA2_NOMASK;
+  hi2c1.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
+  hi2c1.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
+  if (HAL_I2C_Init(&hi2c1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+}
+
+/* USER CODE BEGIN 4 */
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
+    if (huart->Instance == USART1) {
+        // Usa IT per trasmettere senza bloccare la CPU
+        HAL_UART_Transmit_IT(&huart2, &rxData1, 1);
+
+        // Verifica se si è premuto invio (fine del comando)
+        if (rxData1 == '\n' || rxData1 == '\r') {
+            rx_buff[i] = '\0'; // Termina la stringa
+            cmd_received = 1;  // Notifica al ciclo main che il comando è pronto
+        } else {
+            if (i < 31) { // Previene l'overflow del buffer
+                rx_buff[i] = rxData1;
+                i++;
+            }
+        }
+
+        HAL_UART_Receive_IT(&huart1, &rxData1, 1);
+    }
+    else if (huart->Instance == USART2) {
+        HAL_UART_Transmit_IT(&huart1, &rxData2, 1);
+        HAL_UART_Transmit_IT(&huart2, &rxData2, 1);
+
+        HAL_UART_Receive_IT(&huart2, &rxData2, 1);
+    }
+}
+
+void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart) {
+    if (huart->ErrorCode & HAL_UART_ERROR_ORE) {
+        // Forza la ripartenza della ricezione se c'è un errore di Overrun
+        if (huart->Instance == USART1) HAL_UART_Receive_IT(&huart1, &rxData1, 1);
+        if (huart->Instance == USART2) HAL_UART_Receive_IT(&huart2, &rxData2, 1);
+    }
+}
+/* USER CODE END 4 */
+
+/**
+  * @brief  This function is executed in case of error occurrence.
+  * @retval None
+  */
+void Error_Handler(void)
+{
+  __disable_irq();
+  while (1)
+  {
+  }
+}

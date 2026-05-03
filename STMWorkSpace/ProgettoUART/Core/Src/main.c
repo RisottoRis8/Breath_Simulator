@@ -21,6 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "string.h"
 
 /* USER CODE END Includes */
 
@@ -40,21 +41,23 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
-ADC_HandleTypeDef hadc1;
+I2C_HandleTypeDef hi2c1;
+
+TIM_HandleTypeDef htim6;
 
 UART_HandleTypeDef huart1;
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
-uint8_t pc_byte;
-uint8_t bt_byte;
-uint8_t pc_buffer[32]; // Buffer per dati dal PC
-uint8_t bt_buffer[32];
-int indexK;
-char x[10];
-char y[10];
-volatile uint16_t val_x = 0;
-volatile uint16_t val_y = 0;
+uint8_t rxData1;
+uint8_t rxData2;
+uint8_t rx_buff[32];
+uint8_t rx_back[32];
+int i;
+int cmd_received;
+int numero_conversioni;
+uint8_t flag_conversione;
+int track_conversioni;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -62,13 +65,44 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART2_UART_Init(void);
 static void MX_USART1_UART_Init(void);
-static void MX_ADC1_Init(void);
+static void MX_I2C1_Init(void);
+static void MX_TIM6_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+void leggi_pressione(){
+						HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, GPIO_PIN_SET);
+		                uint8_t cmd = 0xF1; // Comando di Trigger Measurement per SDP610
+		                uint8_t data[3];
+		                char out_buf[64];
+
+		                // Invia comando all'indirizzo 0x40 (in HAL è shiftato a sinistra: 0x80)
+		                if (HAL_I2C_Master_Transmit(&hi2c1, 0x80, &cmd, 1, 100) == HAL_OK) {
+
+		                    HAL_Delay(50); // L'SDP610 richiede fino a ~45ms per effettuare la misurazione
+
+		                    // Leggi 2 byte di dati + 1 byte di CRC
+		                    if (HAL_I2C_Master_Receive(&hi2c1, 0x80, data, 3, 100) == HAL_OK) {
+		                        int16_t ticks = (data[0] << 8) | data[1];
+		                        float pressure = (float)ticks / 60.0f; // Scale factor = 60 per SDP610-500Pa
+
+		                        sprintf(out_buf, "P %.2f Pa %d ms\r\n", pressure,(track_conversioni-numero_conversioni)*70);
+		                        HAL_UART_Transmit(&huart1, (uint8_t*)out_buf, strlen(out_buf), 100);
+		                    } else {
+		                        HAL_UART_Transmit(&huart1, (uint8_t*)"I2C Rx Error\r\n", 14, 100);
+		                    }
+		                } else {
+		                    HAL_UART_Transmit(&huart1, (uint8_t*)"Sensore non trovato\r\n", 21, 100);
+		                }
+		                if (numero_conversioni == 0){
+		                	sprintf(out_buf,"END\r\n");
+		                	HAL_UART_Transmit(&huart1, (uint8_t*)out_buf, strlen(out_buf), 100);
+		                }
+
+}
 
 /* USER CODE END 0 */
 
@@ -80,12 +114,12 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
+	i=0;
+	flag_conversione = 0;
+	track_conversioni = 0;
 
-	indexK=0;
-	for (int i;i<32;i++){
-		pc_buffer[i]='\n';
-		bt_buffer[i]='\n';
-	}
+
+
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -108,38 +142,43 @@ int main(void)
   MX_GPIO_Init();
   MX_USART2_UART_Init();
   MX_USART1_UART_Init();
-  MX_ADC1_Init();
+  MX_I2C1_Init();
+  MX_TIM6_Init();
   /* USER CODE BEGIN 2 */
-  HAL_UART_Receive_IT(&huart2, &pc_byte, 1);
-  HAL_UART_Receive_IT(&huart1, &bt_byte, 1);
+  HAL_TIM_Base_Start_IT(&htim6);
+  HAL_UART_Receive_IT(&huart1, &rxData1, 1);
+  	  HAL_UART_Receive_IT(&huart2, &rxData2, 1);
+  	  cmd_received=0;
+  	  numero_conversioni = 0;
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  if (cmd_received) {
+
+	            // Seleziona il comportamento in base al comando "READ"
+	            if (strncmp((char*)rx_buff, "READ", 4) == 0) {   
+                sscanf((char*)rx_buff, "READ %d", &numero_conversioni);
+                track_conversioni = numero_conversioni;
+
+	            }
+
+	            // Resetta il buffer e la flag per il prossimo comando
+	            memset(rx_buff, 0, 32);
+	            i = 0;
+	            cmd_received = 0;
+	            HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, GPIO_PIN_RESET);
+	        }
+	  if(flag_conversione == 1){
+		  leggi_pressione();
+		  flag_conversione = 0;
+	  }
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  // Avvia l'ADC
-	  // 1. Lancia l'ADC (Leggerà SOLO il Rank 1 -> PA3)
-	  HAL_ADC_Start(&hadc1);
-	  if (HAL_ADC_PollForConversion(&hadc1, 100) == HAL_OK) {
-	      val_x = HAL_ADC_GetValue(&hadc1);
-	  }
-
-	  // 2. Lancia l'ADC di nuovo (Ora leggerà automaticamente il Rank 2 -> PA4)
-	  HAL_ADC_Start(&hadc1);
-	  if (HAL_ADC_PollForConversion(&hadc1, 100) == HAL_OK) {
-	      val_y = HAL_ADC_GetValue(&hadc1);
-	  }
-
-	  // 3. Ferma l'ADC per resettare il ciclo.
-	  // Al prossimo giro del while(1), il primo Start ripartirà dal Rank 1!
-	  HAL_ADC_Stop(&hadc1);
-
-	  HAL_Delay(50); // Piccola pausa
-
   }
   /* USER CODE END 3 */
 }
@@ -189,70 +228,88 @@ void SystemClock_Config(void)
 }
 
 /**
-  * @brief ADC1 Initialization Function
+  * @brief I2C1 Initialization Function
   * @param None
   * @retval None
   */
-static void MX_ADC1_Init(void)
+static void MX_I2C1_Init(void)
 {
 
-  /* USER CODE BEGIN ADC1_Init 0 */
+  /* USER CODE BEGIN I2C1_Init 0 */
 
-  /* USER CODE END ADC1_Init 0 */
+  /* USER CODE END I2C1_Init 0 */
 
-  ADC_ChannelConfTypeDef sConfig = {0};
+  /* USER CODE BEGIN I2C1_Init 1 */
 
-  /* USER CODE BEGIN ADC1_Init 1 */
-
-  /* USER CODE END ADC1_Init 1 */
-
-  /** Common config
-  */
-  hadc1.Instance = ADC1;
-  hadc1.Init.ClockPrescaler = ADC_CLOCK_ASYNC_DIV1;
-  hadc1.Init.Resolution = ADC_RESOLUTION_12B;
-  hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
-  hadc1.Init.ScanConvMode = ADC_SCAN_ENABLE;
-  hadc1.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
-  hadc1.Init.LowPowerAutoWait = DISABLE;
-  hadc1.Init.ContinuousConvMode = DISABLE;
-  hadc1.Init.NbrOfConversion = 2;
-  hadc1.Init.DiscontinuousConvMode = ENABLE;
-  hadc1.Init.NbrOfDiscConversion = 1;
-  hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
-  hadc1.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
-  hadc1.Init.DMAContinuousRequests = DISABLE;
-  hadc1.Init.Overrun = ADC_OVR_DATA_PRESERVED;
-  hadc1.Init.OversamplingMode = DISABLE;
-  if (HAL_ADC_Init(&hadc1) != HAL_OK)
+  /* USER CODE END I2C1_Init 1 */
+  hi2c1.Instance = I2C1;
+  hi2c1.Init.Timing = 0x00100D14;
+  hi2c1.Init.OwnAddress1 = 0;
+  hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
+  hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+  hi2c1.Init.OwnAddress2 = 0;
+  hi2c1.Init.OwnAddress2Masks = I2C_OA2_NOMASK;
+  hi2c1.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
+  hi2c1.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
+  if (HAL_I2C_Init(&hi2c1) != HAL_OK)
   {
     Error_Handler();
   }
 
-  /** Configure Regular Channel
+  /** Configure Analogue filter
   */
-  sConfig.Channel = ADC_CHANNEL_9;
-  sConfig.Rank = ADC_REGULAR_RANK_1;
-  sConfig.SamplingTime = ADC_SAMPLETIME_2CYCLES_5;
-  sConfig.SingleDiff = ADC_SINGLE_ENDED;
-  sConfig.OffsetNumber = ADC_OFFSET_NONE;
-  sConfig.Offset = 0;
-  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  if (HAL_I2CEx_ConfigAnalogFilter(&hi2c1, I2C_ANALOGFILTER_ENABLE) != HAL_OK)
   {
     Error_Handler();
   }
 
-  /** Configure Regular Channel
+  /** Configure Digital filter
   */
-  sConfig.Channel = ADC_CHANNEL_8;
-  sConfig.Rank = ADC_REGULAR_RANK_2;
-  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  if (HAL_I2CEx_ConfigDigitalFilter(&hi2c1, 0) != HAL_OK)
   {
     Error_Handler();
   }
-  /* USER CODE BEGIN ADC1_Init 2 */
+  /* USER CODE BEGIN I2C1_Init 2 */
 
-  /* USER CODE END ADC1_Init 2 */
+  /* USER CODE END I2C1_Init 2 */
+
+}
+
+/**
+  * @brief TIM6 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM6_Init(void)
+{
+
+  /* USER CODE BEGIN TIM6_Init 0 */
+
+  /* USER CODE END TIM6_Init 0 */
+
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+
+  /* USER CODE BEGIN TIM6_Init 1 */
+
+  /* USER CODE END TIM6_Init 1 */
+  htim6.Instance = TIM6;
+  htim6.Init.Prescaler = 999;
+  htim6.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim6.Init.Period = 279;
+  htim6.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim6) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim6, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM6_Init 2 */
+
+  /* USER CODE END TIM6_Init 2 */
 
 }
 
@@ -272,7 +329,7 @@ static void MX_USART1_UART_Init(void)
 
   /* USER CODE END USART1_Init 1 */
   huart1.Instance = USART1;
-  huart1.Init.BaudRate = 9600;
+  huart1.Init.BaudRate = 57600;
   huart1.Init.WordLength = UART_WORDLENGTH_8B;
   huart1.Init.StopBits = UART_STOPBITS_1;
   huart1.Init.Parity = UART_PARITY_NONE;
@@ -358,61 +415,63 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
-{
-    if (huart->Instance == USART2)
-    {
-        // Ricevuto da PC (UART2) -> Invia a Bluetooth (UART1) e echo al PC
-        HAL_UART_Transmit(&huart1, &pc_byte, 1, 10);
-        // Riattiva la ricezione da PC
-        HAL_UART_Receive_IT(&huart2, &pc_byte, 1);
-        return; // Important: return after handling
-    }
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
+    if (huart->Instance == USART1) {
+        // Usa IT per trasmettere senza bloccare la CPU
+        HAL_UART_Transmit_IT(&huart2, &rxData1, 1);
+        rx_buff[i]=rxData1;
+        rx_back[i]=rxData1;
+        i++;
+        if (rxData1=='\n'){
+        	while(i<32){
+        		rx_buff[i]='\0';
+        		rx_back[i]='\0';
+        		i++;
 
-    if (huart->Instance == USART1)
-    {
-        // Ricevuto da Bluetooth (UART1) -> Invia a PC (UART2)
-        HAL_UART_Transmit(&huart2, &bt_byte, 1, 10);
-        bt_buffer[indexK]=bt_byte;
-        indexK++;
-        if(bt_byte=='\n'){
-        	bt_buffer[indexK]='\0';
-        	Parser();
+        	}
+        	HAL_UART_Transmit_IT(&huart1,rx_back,strlen(rx_back));
+        	cmd_received=1;
+        	i=0;
         }
-        // Riattiva la ricezione da Bluetooth
-        HAL_UART_Receive_IT(&huart1, &bt_byte, 1);
-        HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, GPIO_PIN_SET);
-        HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, GPIO_PIN_RESET);
+
+        HAL_UART_Receive_IT(&huart1, &rxData1, 1);
+    }
+    else if (huart->Instance == USART2) {
+        HAL_UART_Transmit_IT(&huart1, &rxData2, 1);
+        HAL_UART_Transmit_IT(&huart2, &rxData2, 1);
+
+        HAL_UART_Receive_IT(&huart2, &rxData2, 1);
     }
 }
 
-void Read() {
-    // 1. Creiamo un buffer temporaneo grande abbastanza (es. 50 caratteri)
-    char pacchetto_dati[50];
-
-    // 2. Costruiamo tutta la frase inserendo i due numeri (%d)
-    sprintf(pacchetto_dati, "X:%d Y:%d\n", val_x, val_y);
-
-    // 3. Spediamo via Bluetooth tutto in un colpo solo!
-    HAL_UART_Transmit(&huart1, (uint8_t *)pacchetto_dati, strlen(pacchetto_dati), 100);
+// AGGIUNGI QUESTA FUNZIONE PER SBLOCCARE LA UART
+void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart) {
+    if (huart->ErrorCode & HAL_UART_ERROR_ORE) {
+        // Forza la ripartenza della ricezione se c'è un errore di Overrun
+        if (huart->Instance == USART1) HAL_UART_Receive_IT(&huart1, &rxData1, 1);
+        if (huart->Instance == USART2) HAL_UART_Receive_IT(&huart2, &rxData2, 1);
+    }
 }
 
-void ConvertiVeloce(int32_t a, char *str_buffer) {
-    // Trasforma l'intero in stringa (%ld sta per long decimal)
-    sprintf(str_buffer, "%d", a);
-}
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
-void Parser() {
-    // Controlla se le prime 4 lettere sono "Read"
-    // Il secondo controllo (spazio, a capo o fine stringa) serve per evitare
-    // che si attivi per sbaglio con parole come "Reading" o "Ready"
-    if (strncmp(bt_buffer, "Read", 4) == 0 &&
-       (bt_buffer[4] == ' ' || bt_buffer[4] == '\r' || bt_buffer[4] == '\n' || bt_buffer[4] == '\0')) {
+{
 
-        Read();
+    if(htim->Instance == TIM6)
+
+    {
+    	if(numero_conversioni > 0){
+    		if (numero_conversioni == track_conversioni){
+    			char output_buff[16];
+                sprintf(output_buff,"STARTED\r\n");
+                HAL_UART_Transmit(&huart1, (uint8_t*)output_buff, strlen(output_buff), 100);
+    		}
+    		numero_conversioni = numero_conversioni -1;
+    		flag_conversione = 1;
+    	}
 
     }
-    indexK=0;
+
 }
 /* USER CODE END 4 */
 
