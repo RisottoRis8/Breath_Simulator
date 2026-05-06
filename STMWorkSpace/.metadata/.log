@@ -709,3 +709,35 @@ Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -keyring /Users/crist
 
 !ENTRY com.st.stm32cube.ide.mcu.debug.launch 2 0 2026-05-02 00:48:05.557
 !MESSAGE Won't launch debug session since we failed to locate the binary.
+!SESSION 2026-05-05 00:35:17.047 -----------------------------------------------
+eclipse.buildId=Version 1.19.0
+java.version=21.0.3
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=it_IT
+Framework arguments:  -keyring /Users/cristianpetramale/.eclipse_keyring
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -keyring /Users/cristianpetramale/.eclipse_keyring
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2026-05-05 00:35:25.798
+!MESSAGE Log4j2 initialized with config file /Users/cristianpetramale/Biomed_projects/STMWorkSpace/.metadata/.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2026-05-05 00:35:35.887
+!MESSAGE Started RMI Server, listening on port 41337
+!SESSION 2026-05-06 14:47:14.102 -----------------------------------------------
+eclipse.buildId=Version 1.19.0
+java.version=21.0.3
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=it_IT
+Framework arguments:  -keyring /Users/cristianpetramale/.eclipse_keyring
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -keyring /Users/cristianpetramale/.eclipse_keyring
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2026-05-06 14:47:21.527
+!MESSAGE Log4j2 initialized with config file /Users/cristianpetramale/Biomed_projects/STMWorkSpace/.metadata/.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2026-05-06 14:47:30.479
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY org.eclipse.cdt.core 1 0 2026-05-06 14:49:35.140
+!MESSAGE Indexed 'ProgettoUART' (25 sources, 124 headers) in 4.59 sec: 14,217 declarations; 84,142 references; 3 unresolved inclusions; 46 syntax errors; 171 unresolved names (0.17%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2026-05-06 14:50:38.218
+!MESSAGE Indexed 'ProgettoUART2' (26 sources, 157 headers) in 3.49 sec: 17,554 declarations; 91,685 references; 3 unresolved inclusions; 46 syntax errors; 171 unresolved names (0.16%)
