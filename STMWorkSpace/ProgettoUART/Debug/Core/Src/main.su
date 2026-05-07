@@ -1,4 +1,4 @@
-../Core/Src/main.c:76:6:leggi_pressione	96	static
+../Core/Src/main.c:76:6:leggi_pressione	104	static
 ../Core/Src/main.c:113:5:main	8	static
 ../Core/Src/main.c:190:6:SystemClock_Config	96	static
 ../Core/Src/main.c:235:13:MX_I2C1_Init	8	static

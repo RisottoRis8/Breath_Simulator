@@ -3762,17 +3762,17 @@ LOAD /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.id
                 0x0800101c                __aeabi_idiv0
  *(.text*)
  .text.leggi_pressione
-                0x08001020      0x128 ./Core/Src/main.o
+                0x08001020      0x12c ./Core/Src/main.o
                 0x08001020                leggi_pressione
- .text.main     0x08001148       0xf0 ./Core/Src/main.o
-                0x08001148                main
+ .text.main     0x0800114c       0xf0 ./Core/Src/main.o
+                0x0800114c                main
  .text.SystemClock_Config
-                0x08001238       0x8c ./Core/Src/main.o
-                0x08001238                SystemClock_Config
+                0x0800123c       0x8c ./Core/Src/main.o
+                0x0800123c                SystemClock_Config
  .text.MX_I2C1_Init
-                0x080012c4       0x80 ./Core/Src/main.o
+                0x080012c8       0x80 ./Core/Src/main.o
  .text.MX_TIM6_Init
-                0x08001344       0x70 ./Core/Src/main.o
+                0x08001348       0x6c ./Core/Src/main.o
  .text.MX_USART1_UART_Init
                 0x080013b4       0x60 ./Core/Src/main.o
  .text.MX_USART2_UART_Init

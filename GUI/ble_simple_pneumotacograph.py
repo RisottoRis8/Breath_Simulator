@@ -1,5 +1,7 @@
 import flet as ft
 import asyncio
+import csv
+from datetime import datetime
 from bleak import BleakScanner, BleakClient
 
 # UUID standard del servizio Nordic UART
@@ -46,11 +48,9 @@ async def main(page: ft.Page):
     def extend_x_axis(x_val):
         current_max = pressure_chart.max_x if pressure_chart.max_x else 5.0
         if x_val >= current_max:
-            # Espandi l'asse in blocchi da 5 secondi
             new_max = current_max + 5.0
             pressure_chart.max_x = new_max
             
-            # Adatta la distanza delle etichette X per evitare affollamento
             step = 1
             if new_max > 20:
                 step = 2
@@ -87,8 +87,9 @@ async def main(page: ft.Page):
     async def notification_handler(sender, data):
         try:
             msg = data.decode('utf-8').strip()
-            gui_log(f"🟢 [ESP32]: {msg}", ft.Colors.GREEN_700)
+            
             if msg == "STARTED":
+                gui_log(f"🟢 [ESP32]: {msg}", ft.Colors.GREEN_700)
                 pressure_state["collecting"] = True
                 pressure_state["sum"] = 0.0
                 pressure_state["count"] = 0
@@ -96,28 +97,109 @@ async def main(page: ft.Page):
                 pressure_state["avg"] = None
                 pressure_state["resistance"] = None
                 
-                avg_pressure_text.value = "Media Pressione: -- Pa"
+                avg_pressure_text.value = "Media Pressione Globale: -- Pa"
                 resistance_text.value = "Resistenza: --"
                 
-                # Resetta il grafico a 5 secondi e ripulisce i dati
                 pressure_chart.data_series[0].data_points = []
                 pressure_chart.max_x = 5.0
                 base_x_labels = []
                 for i in range(6):
                     base_x_labels.append(ft.ChartAxisLabel(i, label=ft.Text(str(i), size=11, color=ft.Colors.GREY_700)))
                 pressure_chart.bottom_axis.labels = base_x_labels
-                
                 page.update()
                 
             elif msg == "END":
+                gui_log(f"🟢 [ESP32]: {msg}", ft.Colors.GREEN_700)
                 if pressure_state["count"] > 0:
+                    # Aggiornamento finale del grafico a fine lettura
+                    pressure_chart.data_series[0].data_points = pressure_state["points"]
+                    
                     avg = pressure_state["sum"] / pressure_state["count"]
                     pressure_state["avg"] = avg
-                    avg_pressure_text.value = f"Media Pressione: {avg:.2f} Pa"
+                    avg_pressure_text.value = f"Media Globale: {avg:.2f} Pa"
                     update_resistance()
+                    page.update()
+
+                    # --- SEGMENTAZIONE DATI PER CSV ---
+                    points = pressure_state["points"]
+                    measurements = []
+                    current_segment = []
+                    
+                    # 0=idle, 1=positiva, -1=negativa
+                    phase = 0 
+                    
+                    for p in points:
+                        y = p.y
+                        current_segment.append(p)
+                        
+                        if phase == 0:
+                            if y >= 0.3:
+                                phase = 1
+                            elif y <= -0.3:
+                                phase = -1
+                        elif phase == 1:
+                            # TRIGGER: La curva scende da Positiva a Negativa. Inizia una nuova misura!
+                            if y <= -0.3: 
+                                current_segment.pop() # Rimuove il punto appena letto per inserirlo nel prossimo blocco
+                                if current_segment:
+                                    measurements.append(current_segment)
+                                current_segment = [p] # Inizia il nuovo blocco
+                                phase = -1
+                        elif phase == -1:
+                            # Se passa a positiva, continua semplicemente nella stessa "misurazione"
+                            if y >= 0.3:
+                                phase = 1
+
+                    if current_segment:
+                        measurements.append(current_segment)
+
+                    # --- ESPORTAZIONE CSV A RIGHE (CON FILTRO ZONA MORTA) ---
+                    if measurements:
+                        filename = f"misure_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
+                        cap_rif = pressure_state["reference_capacity"]
+                        str_cap_rif = f"{cap_rif}" if cap_rif is not None else "--"
+                        
+                        try:
+                            with open(filename, mode='w', newline='') as f:
+                                writer = csv.writer(f)
+                                writer.writerow(["Misura N.", "Pressione Media (Pa)", "Litri di Riferimento", "Istante Inizio (s)", "Durata Attiva (s)"])
+                                
+                                misura_effettiva_idx = 1
+                                for seg in measurements:
+                                    # FILTRO: Mantieni solo i punti FUORI dalla zona morta
+                                    punti_attivi = [p for p in seg if p.y >= 0.3 or p.y <= -0.3]
+                                    
+                                    # Se il segmento ha punti validi dopo il filtro
+                                    if len(punti_attivi) > 0:
+                                        t_inizio = punti_attivi[0].x
+                                        t_fine = punti_attivi[-1].x
+                                        t_misura = t_fine - t_inizio
+                                        
+                                        if t_misura <= 0:
+                                            t_misura = 0.02
+                                        
+                                        somma_p = sum(p.y for p in punti_attivi)
+                                        p_media = somma_p / len(punti_attivi)
+                                        
+                                        writer.writerow([
+                                            misura_effettiva_idx, 
+                                            f"{p_media:.2f}", 
+                                            str_cap_rif, 
+                                            f"{t_inizio:.3f}",
+                                            f"{t_misura:.3f}"
+                                        ])
+                                        misura_effettiva_idx += 1
+                                        
+                            gui_log(f"💾 Salvate {misura_effettiva_idx - 1} misure in: {filename}", ft.Colors.GREEN)
+                        except Exception as e:
+                            gui_log(f"❌ Errore salvataggio CSV: {e}", ft.Colors.RED)
+                    else:
+                        gui_log("⚠️ CSV non generato: nessun dato oltre la soglia minima (+/- 0.3 Pa).", ft.Colors.ORANGE)
+
                 else:
                     avg_pressure_text.value = "Media Pressione: -- Pa"
                     resistance_text.value = "Resistenza: --"
+                
                 pressure_state["collecting"] = False
                 page.update()
                 
@@ -133,7 +215,8 @@ async def main(page: ft.Page):
                             except ValueError:
                                 time_ms = None
                         if time_ms is None:
-                            time_ms = len(pressure_state["points"]) * 70
+                            time_ms = len(pressure_state["points"]) * 20
+                        
                         x = time_ms / 1000.0
                         
                         pressure_state["last_point_time_s"] = x
@@ -141,22 +224,24 @@ async def main(page: ft.Page):
                         pressure_state["sum"] += pressure
                         pressure_state["count"] += 1
                         
-                        # Controlla ed eventualmente estende l'asse X
-                        extend_x_axis(x)
-                        
+                        # Fix Performance: Aggiunto punto SENZA tooltip
                         pressure_state["points"].append(
-                            ft.LineChartDataPoint(x=x, y=pressure, tooltip=f"{pressure} Pa at {x:.2f}s")
+                            ft.LineChartDataPoint(x=x, y=pressure) 
                         )
-                        pressure_chart.data_series[0].data_points = pressure_state["points"]
                         
-                        avg = pressure_state["sum"] / pressure_state["count"]
-                        pressure_state["avg"] = avg
-                        avg_pressure_text.value = f"Media Pressione: {avg:.2f} Pa"
-                        page.update()
+                        # Fix Performance: Aggiorna la GUI solo una volta ogni 20 punti (circa ogni 400ms)
+                        if pressure_state["count"] % 20 == 0:
+                            pressure_chart.data_series[0].data_points = pressure_state["points"]
+                            extend_x_axis(x)
+                            avg = pressure_state["sum"] / pressure_state["count"]
+                            pressure_state["avg"] = avg
+                            avg_pressure_text.value = f"Media Pressione: {avg:.2f} Pa"
+                            page.update()
+                            
                     except ValueError:
                         pass
         except Exception:
-            gui_log(f"🟢 [ESP32 RAW]: {data}", ft.Colors.GREEN_700)
+            pass
 
     async def connect_click(e):
         if not device_dropdown.value:
@@ -236,10 +321,10 @@ async def main(page: ft.Page):
             read_count_text.value = "Letture: 0"
         else:
             ms = int(digits)
-            rounded_ms = round(ms / 70) * 70
+            rounded_ms = round(ms / 20) * 20
             if rounded_ms < 0:
                 rounded_ms = 0
-            read_count_text.value = f"Letture: {rounded_ms // 70}"
+            read_count_text.value = f"Letture: {rounded_ms // 20}"
         page.update()
 
     def update_reference_capacity(e=None):
@@ -284,11 +369,11 @@ async def main(page: ft.Page):
             gui_log("⚠️ Inserisci un valore valido in ms", ft.Colors.ORANGE)
             return
         ms = int(raw)
-        rounded_ms = round(ms / 70) * 70
+        rounded_ms = round(ms / 20) * 20
         if rounded_ms <= 0:
             gui_log("⚠️ Inserisci almeno 35 ms per ottenere una lettura", ft.Colors.ORANGE)
             return
-        reads = rounded_ms // 70
+        reads = rounded_ms // 20
         read_ms_input.value = str(rounded_ms)
         pressure_state["last_read_duration_ms"] = rounded_ms
         page.update()
@@ -327,17 +412,15 @@ async def main(page: ft.Page):
         width=260,
     )
 
-    # Generazione etichette Y ad alta risoluzione (ogni 140 Pa)
     y_axis_labels = []
     for val in range(-560, 561, 140):
         y_axis_labels.append(ft.ChartAxisLabel(val, label=ft.Text(str(val), size=11, color=ft.Colors.GREY_700)))
 
-    # Generazione etichette X base (0-5 s)
     x_axis_labels = []
     for i in range(6):
         x_axis_labels.append(ft.ChartAxisLabel(i, label=ft.Text(str(i), size=11, color=ft.Colors.GREY_700)))
 
-    # --- GRAFICO CORRETTO ---
+    # --- GRAFICO ---
     pressure_chart = ft.LineChart(
         data_series=[
             ft.LineChartData(
@@ -356,7 +439,6 @@ async def main(page: ft.Page):
         max_y=560,
         baseline_x=0,
         baseline_y=0,
-        # Griglia orizzontale molto più densa (ogni 70 Pa) per aumentare la risoluzione visiva
         horizontal_grid_lines=ft.ChartGridLines(interval=70, color=ft.Colors.GREY_300, width=1),
         vertical_grid_lines=ft.ChartGridLines(interval=1, color=ft.Colors.GREY_300, width=1),
         left_axis=ft.ChartAxis(

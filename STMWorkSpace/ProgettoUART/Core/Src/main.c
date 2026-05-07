@@ -58,6 +58,7 @@ int cmd_received;
 int numero_conversioni;
 uint8_t flag_conversione;
 int track_conversioni;
+uint8_t flag_rumore;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -82,14 +83,17 @@ void leggi_pressione(){
 		                // Invia comando all'indirizzo 0x40 (in HAL è shiftato a sinistra: 0x80)
 		                if (HAL_I2C_Master_Transmit(&hi2c1, 0x80, &cmd, 1, 100) == HAL_OK) {
 
-		                    HAL_Delay(50); // L'SDP610 richiede fino a ~45ms per effettuare la misurazione
+		                    HAL_Delay(9); // L'SDP610 richiede fino a ~45ms per effettuare la misurazione
 
 		                    // Leggi 2 byte di dati + 1 byte di CRC
 		                    if (HAL_I2C_Master_Receive(&hi2c1, 0x80, data, 3, 100) == HAL_OK) {
 		                        int16_t ticks = (data[0] << 8) | data[1];
 		                        float pressure = (float)ticks / 60.0f; // Scale factor = 60 per SDP610-500Pa
+		                        if (pressure > 0.3){
+		                        	flag_rumore = 0;
+		                        }
 
-		                        sprintf(out_buf, "P %.2f Pa %d ms\r\n", pressure,(track_conversioni-numero_conversioni)*70);
+		                        sprintf(out_buf, "P %.2f Pa %d ms\r\n", pressure,(track_conversioni-numero_conversioni)*20);
 		                        HAL_UART_Transmit(&huart1, (uint8_t*)out_buf, strlen(out_buf), 100);
 		                    } else {
 		                        HAL_UART_Transmit(&huart1, (uint8_t*)"I2C Rx Error\r\n", 14, 100);
@@ -293,9 +297,9 @@ static void MX_TIM6_Init(void)
 
   /* USER CODE END TIM6_Init 1 */
   htim6.Instance = TIM6;
-  htim6.Init.Prescaler = 999;
+  htim6.Init.Prescaler = 39;
   htim6.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim6.Init.Period = 279;
+  htim6.Init.Period = 1999;
   htim6.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_Base_Init(&htim6) != HAL_OK)
   {
@@ -466,7 +470,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
                 sprintf(output_buff,"STARTED\r\n");
                 HAL_UART_Transmit(&huart1, (uint8_t*)output_buff, strlen(output_buff), 100);
     		}
-    		numero_conversioni = numero_conversioni -1;
+    		if(flag_rumore==0){
+    		numero_conversioni = numero_conversioni -1;}
     		flag_conversione = 1;
     	}
 
