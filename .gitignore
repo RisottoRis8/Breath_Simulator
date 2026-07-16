@@ -1,2 +1,10 @@
 .DS_Store
 .DS_Store
+.history/
+
+# KiCad backups and outputs
+*-back.kicad_sch
+*-back.kicad_pcb
+*-bak
+*.bck
+*.zip

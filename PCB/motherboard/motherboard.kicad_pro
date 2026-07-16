@@ -60,120 +60,7 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [
-        [
-          "clearance|217391299|86785300|7b2f39da-edb7-41d5-9db2-30bf6cb8628c|563d6f79-d96f-4323-8fa1-31664f5fa471",
-          ""
-        ],
-        [
-          "clearance|217391299|88000300|13109233-2772-4577-a2bd-4f0ab219037f|0acfd201-bdf8-47ff-a614-abf0d250ad9b",
-          ""
-        ],
-        [
-          "clearance|217391299|88785301|28fbda5a-a798-4baa-a911-f3331ebb05c4|0acfd201-bdf8-47ff-a614-abf0d250ad9b",
-          ""
-        ],
-        [
-          "clearance|217391299|89285300|6457896f-5bc2-4c8c-8b29-165723da1dd0|0acfd201-bdf8-47ff-a614-abf0d250ad9b",
-          ""
-        ],
-        [
-          "clearance|217588700|86587899|0be50da7-5f2e-419d-85a1-ebe59dc57bc3|563d6f79-d96f-4323-8fa1-31664f5fa471",
-          ""
-        ],
-        [
-          "clearance|217588700|89712101|bb8a56f3-68e9-4275-8422-87b23463c6a3|0acfd201-bdf8-47ff-a614-abf0d250ad9b",
-          ""
-        ],
-        [
-          "clearance|218088699|86587899|1b1c7032-d67a-45bc-b97c-6bc4294e2338|563d6f79-d96f-4323-8fa1-31664f5fa471",
-          ""
-        ],
-        [
-          "clearance|218088699|89712101|b723d9b0-40f2-4167-b207-af66a5a314b0|0acfd201-bdf8-47ff-a614-abf0d250ad9b",
-          ""
-        ],
-        [
-          "clearance|218588700|86587899|abe8de1a-e315-4a2a-a08f-8658c83f4908|563d6f79-d96f-4323-8fa1-31664f5fa471",
-          ""
-        ],
-        [
-          "clearance|218588700|89712101|eb139081-905c-49cf-ad92-25a7fc581d65|0acfd201-bdf8-47ff-a614-abf0d250ad9b",
-          ""
-        ],
-        [
-          "clearance|219088700|86587899|f0c44edb-5fe1-4d7c-b6f8-903b813e8c6f|563d6f79-d96f-4323-8fa1-31664f5fa471",
-          ""
-        ],
-        [
-          "clearance|219088700|89712101|b9109420-9c74-4f16-ae5c-0ece74856c12|0acfd201-bdf8-47ff-a614-abf0d250ad9b",
-          ""
-        ],
-        [
-          "clearance|219588701|86587899|a5e102c4-57b0-4eb7-ba6d-8ccce4637874|563d6f79-d96f-4323-8fa1-31664f5fa471",
-          ""
-        ],
-        [
-          "clearance|219588701|89712101|0ea880c6-7e7e-4ce2-93e8-1ff6fd6f9172|0acfd201-bdf8-47ff-a614-abf0d250ad9b",
-          ""
-        ],
-        [
-          "clearance|220088700|86587899|43bf4591-8ab0-4064-8418-02f342832ea1|563d6f79-d96f-4323-8fa1-31664f5fa471",
-          ""
-        ],
-        [
-          "clearance|220088700|89712101|e9f3fe90-1bcc-4637-a3b2-8621a882397c|0acfd201-bdf8-47ff-a614-abf0d250ad9b",
-          ""
-        ],
-        [
-          "clearance|220515501|86785300|f098512a-bdea-4314-abc8-f363c04ade8e|563d6f79-d96f-4323-8fa1-31664f5fa471",
-          ""
-        ],
-        [
-          "clearance|220515501|88000300|ce6e3906-f13a-49e9-be28-80ce0db61656|0acfd201-bdf8-47ff-a614-abf0d250ad9b",
-          ""
-        ],
-        [
-          "starved_thermal|119993626|67100000|11972a23-132e-47e5-8d22-f828cf8aa1de|28ed7519-fcf8-40a2-8562-8f60585056d9|F.Cu",
-          ""
-        ],
-        [
-          "starved_thermal|120037800|44165000|11972a23-132e-47e5-8d22-f828cf8aa1de|5bfb2683-3809-4d7d-a47e-d5cb46fdae8f|F.Cu",
-          ""
-        ],
-        [
-          "starved_thermal|139601327|45516172|11972a23-132e-47e5-8d22-f828cf8aa1de|f8723e90-482b-4591-9103-b1411716e774|F.Cu",
-          ""
-        ],
-        [
-          "starved_thermal|202775001|107599999|11972a23-132e-47e5-8d22-f828cf8aa1de|a24884a6-9891-450e-9e25-88f7ffc44b1a|F.Cu",
-          ""
-        ],
-        [
-          "starved_thermal|207124999|107599999|9899e912-20f0-4a68-b848-ce2ba9c7b281|2dd3d039-c892-4c01-9bc0-d85e7314ee60|F.Cu",
-          ""
-        ],
-        [
-          "starved_thermal|217000000|87399999|11972a23-132e-47e5-8d22-f828cf8aa1de|0ff8133f-dd68-441e-954a-a5aa41579f28|F.Cu",
-          ""
-        ],
-        [
-          "starved_thermal|217000000|88900001|9899e912-20f0-4a68-b848-ce2ba9c7b281|28fbda5a-a798-4baa-a911-f3331ebb05c4|F.Cu",
-          ""
-        ],
-        [
-          "starved_thermal|219000000|97062500|11972a23-132e-47e5-8d22-f828cf8aa1de|617cfb28-2a88-4733-bcaf-9de989d91ca4|F.Cu",
-          ""
-        ],
-        [
-          "track_dangling|213237132|77487132|12c2344f-70ba-4a78-8615-27fe17a1f4b5|00000000-0000-0000-0000-000000000000",
-          ""
-        ],
-        [
-          "track_dangling|219015900|88837500|77bd5785-a29f-47a1-ab57-5ced5153e734|00000000-0000-0000-0000-000000000000",
-          ""
-        ]
-      ],
+      "drc_exclusions": [],
       "meta": {
         "version": 2
       },
@@ -662,10 +549,10 @@
     "bom_export_filename": "..\\others\\motherboard.csv",
     "bom_fmt_presets": [],
     "bom_fmt_settings": {
-      "field_delimiter": ",",
+      "field_delimiter": ";",
       "keep_line_breaks": false,
       "keep_tabs": false,
-      "name": "CSV",
+      "name": "---",
       "ref_delimiter": ",",
       "ref_range_delimiter": "",
       "string_delimiter": "\""
@@ -693,22 +580,22 @@
           "show": true
         },
         {
-          "group_by": true,
+          "group_by": false,
           "label": "DNP",
           "name": "${DNP}",
-          "show": true
+          "show": false
         },
         {
-          "group_by": true,
+          "group_by": false,
           "label": "Exclude from BOM",
           "name": "${EXCLUDE_FROM_BOM}",
-          "show": true
+          "show": false
         },
         {
-          "group_by": true,
+          "group_by": false,
           "label": "Exclude from Board",
           "name": "${EXCLUDE_FROM_BOARD}",
-          "show": true
+          "show": false
         },
         {
           "group_by": true,
@@ -720,7 +607,7 @@
           "group_by": false,
           "label": "Datasheet",
           "name": "Datasheet",
-          "show": true
+          "show": false
         },
         {
           "group_by": false,
@@ -831,9 +718,15 @@
           "show": false
         },
         {
-          "group_by": true,
+          "group_by": false,
           "label": "VRATE",
           "name": "VRATE",
+          "show": true
+        },
+        {
+          "group_by": false,
+          "label": "LCSC",
+          "name": "LCSC",
           "show": true
         }
       ],

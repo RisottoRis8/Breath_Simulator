@@ -1,0 +1,128 @@
+(footprint "CPG47THB"
+	(version 20260206)
+	(generator "pcbnew")
+	(generator_version "10.0")
+	(layer "F.Cu")
+	(descr "CPG-47-TH-B-1")
+	(tags "Connector")
+	(property "Reference" "J**"
+		(at -2.5 2 0)
+		(layer "F.SilkS")
+		(uuid "6f8d5f0d-7070-4001-a1f6-82d39c6bcd90")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.254)
+			)
+		)
+	)
+	(property "Value" "CPG47THB"
+		(at 0 0 0)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "c9aae25b-144f-4c1f-af98-ed4473445a15")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.254)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "3b93e2b3-360e-47dc-af23-bf5f58ae7a39")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "a2ac746f-31c7-4aa7-95a1-5681cc6e6055")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(attr through_hole)
+	(duplicate_pad_numbers_are_jumpers no)
+	(fp_line
+		(start -1.3 0)
+		(end -1.3 0)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "671d21ab-4ce6-4918-a756-23eb61292dd8")
+	)
+	(fp_line
+		(start 1.3 0)
+		(end 1.3 0)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "1ed9a6cf-fef9-4d9a-bfae-55ece767f170")
+	)
+	(fp_arc
+		(start -1.3 0)
+		(mid 0 -1.3)
+		(end 1.3 0)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "128c31a6-ee5a-44ed-8280-2b2bcab52053")
+	)
+	(fp_arc
+		(start 1.3 0)
+		(mid 0 1.3)
+		(end -1.3 0)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "dc4efaa1-d9f4-4493-8d54-c681bfe89ce4")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 4 0)
+		(layer "F.Fab")
+		(uuid "07c29da7-64fe-4e81-8d41-30cc5d46dfdd")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.254)
+			)
+		)
+	)
+	(pad "1" thru_hole circle
+		(at 0 0)
+		(size 2.2 2.2)
+		(drill 0.7)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "04775cc3-9b0f-455d-a036-46fc765c32e9")
+	)
+	(embedded_fonts no)
+	(model "C:/Users/amagl/Documents/UNI/Biomed_projects/PCB/libraries/3d/CPG-47-TH-B.stp"
+		(offset
+			(xyz 0 -134.9 -157.5)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz -0 90 -0)
+		)
+	)
+)
