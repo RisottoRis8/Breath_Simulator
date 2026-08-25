@@ -142,12 +142,7 @@ class HM10App(QMainWindow):
         self.btn_stop.setMinimumHeight(40)
         self.btn_stop.clicked.connect(self.send_stop)
 
-        self.btn_self_test = QPushButton("Self Test")
-        self.btn_self_test.setMinimumHeight(40)
-        self.btn_self_test.clicked.connect(self.send_self_test)
-
         global_layout.addWidget(self.btn_stop)
-        global_layout.addWidget(self.btn_self_test)
 
         right_layout.addWidget(global_group)
 
@@ -485,7 +480,7 @@ class HM10App(QMainWindow):
         res_str = self.ent_resistance.text()
         try:
             self.current_resistance = float(res_str)
-            self.send_cmd(f"R: {self.current_resistance}\n")
+            self.send_cmd(f"R : {self.current_resistance}\n")
         except ValueError:
             QMessageBox.warning(self, "Input Error", "Resistance must be a valid number.")
 
