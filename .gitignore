@@ -1,10 +1,57 @@
-.DS_Store
+# Operating-system and editor state
 .DS_Store
 .history/
+.vscode/*.log
 
-# KiCad backups and outputs
+# Python local environments and generated files
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# Arduino, PlatformIO and embedded build output
+.pio/
+build/
+Debug/
+Release/
+*.o
+*.d
+*.su
+*.cyclo
+*.elf
+*.hex
+*.bin
+*.map
+*.list
+
+# KiCad local state and backups
+*.kicad_prl
+fp-info-cache
+*.bak
+*.bck
 *-back.kicad_sch
 *-back.kicad_pcb
-*-bak
-*.bck
+*-backups/
+
+# Regenerable manufacturing and CAD exports
+**/production/
+**/jlcpcb/
+**/pcbway_production/
+*.gbr
+*.gbrjob
+*.drl
+*.pos
+*.step
+*.stp
+*.glb
+*.dxf
 *.zip
+
+# Local GUI logs and analysis outputs
+**/pressure_log_*.csv
+**/calibration_data_*.csv
+**/output/
+**/results/
+*.fig
+*.mat

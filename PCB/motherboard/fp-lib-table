@@ -1,7 +1,0 @@
-(fp_lib_table
-	(version 7)
-	(lib (name "inductors") (type "KiCad") (uri "C:/Users/amagl/Documents/UNI/Biomed_projects/PCB/libraries/footprint/inductors.pretty") (options "") (descr ""))
-	(lib (name "diodes") (type "KiCad") (uri "C:/Users/amagl/Documents/UNI/Biomed_projects/PCB/libraries/footprint/diodes.pretty") (options "") (descr ""))
-	(lib (name "transistors") (type "KiCad") (uri "C:/Users/amagl/Documents/UNI/Biomed_projects/PCB/libraries/footprint/transistors.pretty") (options "") (descr ""))
-	(lib (name "resistors") (type "KiCad") (uri "C:/Users/amagl/Documents/UNI/Biomed_projects/PCB/libraries/footprint/resistors.pretty") (options "") (descr ""))
-)
