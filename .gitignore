@@ -8,6 +8,7 @@
 *.markers
 *.snap
 *.prefs
+.vscode/
 .vscode/*.log
 
 # Python local environments and generated files
