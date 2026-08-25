@@ -1,6 +1,13 @@
 # Operating-system and editor state
 .DS_Store
 .history/
+.metadata/
+.settings/
+*.index
+*.pdom
+*.markers
+*.snap
+*.prefs
 .vscode/*.log
 
 # Python local environments and generated files

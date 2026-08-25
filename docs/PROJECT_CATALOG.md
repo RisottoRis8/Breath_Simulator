@@ -8,8 +8,8 @@ This document is the repository inventory for the project presented in the root 
 | --- | --- | --- | --- |
 | Project documentation | `README.md`, `docs/`, `mechanical/` | `README.md`, `docs/`, `mechanical/` | Organized |
 | ESP32 main firmware | `firmware/esp32/main/` | `firmware/esp32/main/` | Final system |
-| ESP32 bridges and sketches | `firmware/esp32/bridges/`, `archive/VibeCoded_AAAh/` | `firmware/esp32/bridges/`, `archive/` | Prototype/history |
-| STM32 projects | `STMWorkSpace/` | `firmware/stm32/`, `archive/` | Multiple candidates |
+| ESP32 bridges and sketches | `firmware/esp32/bridges/` | `firmware/esp32/bridges/`, `archive/` | Prototype/history |
+| STM32 projects | `firmware/stm32/` | `firmware/stm32/`, `archive/` | Historical implementations |
 | Python GUI | `software/gui/main_gui.py` | `software/gui/` | Final ESP32 control interface |
 | Python tools | `software/tools/` | `software/tools/` | Utilities |
 | KiCad boards | `hardware/motherboard-r1/`, `hardware/motherboard-r2/`, `hardware/pogo-adapter/` | `hardware/` | Preserve sources |
